@@ -8,7 +8,7 @@
 
 #include "DetectorNerea.h"
 
-#include "PmtR11410.h"
+#include "SiPMNerea.h"
 #include "NextNewKDB.h"
 #include "MaterialsList.h"
 #include "OpticalMaterialProperties.h"
@@ -87,57 +87,79 @@ namespace nexus {
 		      chamber_logic, false, 0, true);
 
 
+
+
+
+
+    SiPMNerea sipm_geom;
+    sipm_geom.Construct();
+    G4LogicalVolume * sipm_logic = sipm_geom.GetLogicalVolume();
+
+    new G4PVPlacement(0, G4ThreeVector(chamber_diam/4., 0., -chamber_length/2.),
+                      sipm_logic, "SIPM", chamber_logic, false, 0, true);
+
+    new G4PVPlacement(0, G4ThreeVector(-chamber_diam/4., 0., -chamber_length/2.),
+                      sipm_logic, "SIPM", chamber_logic, false, 0, true);
+
+    new G4PVPlacement(0, G4ThreeVector(0., chamber_diam/4., -chamber_length/2.),
+                      sipm_logic, "SIPM", chamber_logic, false, 0, true);
+
+
+    new G4PVPlacement(0, G4ThreeVector(0., -chamber_diam/4., -chamber_length/2.), 
+                      sipm_logic, "SIPM", chamber_logic, false, 0, true);
+
+
     // PHOTOMULTIPLIER ///////////////////////////////////////////////
 
-    const G4double sipm_x = 2.4 * mm;
-    const G4double sipm_y = 2.4 * mm;
-    const G4double sipm_z = 0.8 * mm;
+    //const G4double sipm_x = 2.4 * mm;
+    //const G4double sipm_y = 2.4 * mm;
+    //const G4double sipm_z = 0.8 * mm;
 
-    G4Box * sipm_solid = new G4Box("SiPM", sipm_x/2., sipm_y/2., sipm_z/2);
+    //G4Box * sipm_solid = new G4Box("SiPM", sipm_x/2., sipm_y/2., sipm_z/2);
 
-    G4Material * epoxy = materials::Epoxy();
-    epoxy->SetMaterialPropertiesTable(opticalprops::GlassEpoxy());
+    //G4Material * epoxy = materials::Epoxy();
+    //epoxy->SetMaterialPropertiesTable(opticalprops::GlassEpoxy());
 
-    G4LogicalVolume * sipm_logic = new G4LogicalVolume(sipm_solid, epoxy, "SiPM");
+    //G4LogicalVolume * sipm_logic = new G4LogicalVolume(sipm_solid, epoxy, "SiPM");
 
-    new G4PVPlacement(0, G4ThreeVector(sipm_x + 0.2, 0., -chamber_length/2. + sipm_z/2),
-                      sipm_logic, "SiPM", chamber_logic, false, 0, true);
+    //new G4PVPlacement(0, G4ThreeVector(sipm_x + 0.2, 0., -chamber_length/2. + sipm_z/2),
+      //                sipm_logic, "SiPM", chamber_logic, false, 0, true);
 
-    new G4PVPlacement(0, G4ThreeVector(-(sipm_x + 0.2), 0., -chamber_length/2. + sipm_z/2),
-                      sipm_logic, "SiPM", chamber_logic, false, 1, true);
+    //new G4PVPlacement(0, G4ThreeVector(-(sipm_x + 0.2), 0., -chamber_length/2. + sipm_z/2),
+      //                sipm_logic, "SiPM", chamber_logic, false, 1, true);
 
-    new G4PVPlacement(0, G4ThreeVector(0., sipm_y + 0.2, -chamber_length/2. + sipm_z/2),
-                      sipm_logic, "SiPM", chamber_logic, false, 2, true);
+    //new G4PVPlacement(0, G4ThreeVector(0., sipm_y + 0.2, -chamber_length/2. + sipm_z/2),
+      //                sipm_logic, "SiPM", chamber_logic, false, 2, true);
 
-    new G4PVPlacement(0, G4ThreeVector(0., -(sipm_y + 0.2), -chamber_length/2. + sipm_z/2),
-                      sipm_logic, "SiPM", chamber_logic, false, 3, true);
+    //new G4PVPlacement(0, G4ThreeVector(0., -(sipm_y + 0.2), -chamber_length/2. + sipm_z/2),
+      //                sipm_logic, "SiPM", chamber_logic, false, 3, true);
 
 
    // Active windows
 
-   const G4double active_x = 1.   * mm;
-   const G4double active_y = 1.   * mm;
-   const G4double active_z = 0.01 * mm;
+   //const G4double active_x = 1.   * mm;
+   //const G4double active_y = 1.   * mm;
+   //const G4double active_z = 0.01 * mm;
 
-   G4Box * Sipm_active_solid =
-    new G4Box("PHOTODIODES", active_x/2., active_y/2., active_z/2.);
+   //G4Box * Sipm_active_solid =
+    //new G4Box("PHOTODIODES", active_x/2., active_y/2., active_z/2.);
 
-   G4Material * silicon = G4NistManager::Instance()->FindOrBuildMaterial("G4_Si");
+   //G4Material * silicon = G4NistManager::Instance()->FindOrBuildMaterial("G4_Si");
 
-  G4LogicalVolume * Sipm_active_logic =
-    new G4LogicalVolume(Sipm_active_solid, silicon, "PHOTODIODES");
+  //G4LogicalVolume * Sipm_active_logic =
+    //new G4LogicalVolume(Sipm_active_solid, silicon, "PHOTODIODES");
 
-  new G4PVPlacement(0, G4ThreeVector(sipm_x + 0.2, 0., -chamber_length/2. + sipm_z/2),
-                                     Sipm_active_logic, "PHOTODIODES", chamber_logic, false, 0, false);
+  //new G4PVPlacement(0, G4ThreeVector(sipm_x + 0.2, 0., -chamber_length/2. + sipm_z/2),
+    //                                 Sipm_active_logic, "PHOTODIODES", chamber_logic, false, 0, false);
 
-  new G4PVPlacement(0, G4ThreeVector(-(sipm_x + 0.2), 0., -chamber_length/2. + sipm_z/2),
-                                     Sipm_active_logic, "PHOTODIODES", chamber_logic, false, 1, false);
+  //new G4PVPlacement(0, G4ThreeVector(-(sipm_x + 0.2), 0., -chamber_length/2. + sipm_z/2),
+    //                                 Sipm_active_logic, "PHOTODIODES", chamber_logic, false, 1, false);
 
-  new G4PVPlacement(0, G4ThreeVector(0., sipm_y + 0.2, -chamber_length/2. + sipm_z/2),
-                                     Sipm_active_logic, "PHOTODIODES", chamber_logic, false, 2, false);
+  //new G4PVPlacement(0, G4ThreeVector(0., sipm_y + 0.2, -chamber_length/2. + sipm_z/2),
+    //                                 Sipm_active_logic, "PHOTODIODES", chamber_logic, false, 2, false);
 
-  new G4PVPlacement(0, G4ThreeVector(0., -(sipm_y + 0.2), -chamber_length/2. + sipm_z/2),
-                                     Sipm_active_logic, "PHOTODIODES", chamber_logic, false, 3, false);
+  //new G4PVPlacement(0, G4ThreeVector(0., -(sipm_y + 0.2), -chamber_length/2. + sipm_z/2),
+    //                                 Sipm_active_logic, "PHOTODIODES", chamber_logic, false, 3, false);
 
 
 
