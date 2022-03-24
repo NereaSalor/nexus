@@ -89,7 +89,9 @@ namespace nexus {
 
 
 
+    //PHOTOMULTIPLIER //////////////////////////////////////////////
 
+    // Added photomultiplier from other file and inserted 4 inside the detector
 
     SiPMNerea sipm_geom;
     sipm_geom.Construct();
@@ -107,7 +109,7 @@ namespace nexus {
                       sipm_logic, "SIPM", chamber_logic, false, 0, true);
 
 
-    new G4PVPlacement(0, G4ThreeVector(0., -chamber_diam/4., (-chamber_length + sipm_x)/2.), 
+    new G4PVPlacement(0, G4ThreeVector(0., -chamber_diam/4., (-chamber_length + sipm_x)/2.),
                       sipm_logic, "SIPM", chamber_logic, false, 0, true);
 
 
