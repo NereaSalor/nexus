@@ -98,18 +98,18 @@ namespace nexus {
     G4LogicalVolume * sipm_logic = sipm_geom.GetLogicalVolume();
 
     const G4double sipm_x   =  0.8 * mm;
+    const G4double sipm_z_pos = (-chamber_length + sipm_x)/2.
 
-    new G4PVPlacement(0, G4ThreeVector(chamber_diam/4., 0., (-chamber_length + sipm_x)/2.),
+    new G4PVPlacement(0, G4ThreeVector(chamber_diam/4., 0., sipm_z_pos),
                       sipm_logic, "SIPM", chamber_logic, false, 0, true);
 
-    new G4PVPlacement(0, G4ThreeVector(-chamber_diam/4., 0., (-chamber_length + sipm_x)/2.),
+    new G4PVPlacement(0, G4ThreeVector(-chamber_diam/4., 0., sipm_z_pos
+
+    new G4PVPlacement(0, G4ThreeVector(0., chamber_diam/4., sipm_z_pos),
                       sipm_logic, "SIPM", chamber_logic, false, 0, true);
 
-    new G4PVPlacement(0, G4ThreeVector(0., chamber_diam/4., (-chamber_length + sipm_x)/2.),
-                      sipm_logic, "SIPM", chamber_logic, false, 0, true);
 
-
-    new G4PVPlacement(0, G4ThreeVector(0., -chamber_diam/4., (-chamber_length + sipm_x)/2.),
+    new G4PVPlacement(0, G4ThreeVector(0., -chamber_diam/4., sipm_z_pos),
                       sipm_logic, "SIPM", chamber_logic, false, 0, true);
 
 
