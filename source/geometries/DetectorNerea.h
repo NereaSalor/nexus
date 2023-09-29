@@ -10,8 +10,11 @@
 #define DETECTOR_NEREA_H
 
 #include "GeometryBase.h"
+#include <G4RotationMatrix.hh>
 
 class G4GenericMessenger;
+
+namespace nexus {class CylinderPointSampler2020;}
 
 
 namespace nexus {
@@ -32,6 +35,17 @@ namespace nexus {
   private:
     /// Messenger for the definition of control commands
     G4GenericMessenger* msg_;
+
+    // Vertex Generator
+    CylinderPointSampler2020* lab_gen_;
+
+    // Visibility of the geometry
+    G4bool visibility_;
+
+    //SiPM
+    G4RotationMatrix* sipm_rot_;
+    G4double rot_angle_;
+
   };
 
 } // end namespace nexus

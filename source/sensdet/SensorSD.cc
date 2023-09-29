@@ -74,7 +74,6 @@ namespace nexus {
         break;
       }
     }
-
     // If no hit associated to this sensor exists already,
     // create it and set main properties
     if (!hit) {

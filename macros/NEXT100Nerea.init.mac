@@ -1,0 +1,28 @@
+## -----------------------------------------------------------------------------
+## nexus | NEXT100Nerea.init.mac
+##
+## Initialization macro to simulate Kr-83m in a cilindrical detector filled with
+## xenon 
+##
+## The NEXT Collaboration
+## -----------------------------------------------------------------------------
+
+/PhysicsList/RegisterPhysics G4EmStandardPhysics_option4
+/PhysicsList/RegisterPhysics G4DecayPhysics
+/PhysicsList/RegisterPhysics G4RadioactiveDecayPhysics
+/PhysicsList/RegisterPhysics G4OpticalPhysics
+/PhysicsList/RegisterPhysics NexusPhysics
+/PhysicsList/RegisterPhysics G4StepLimiterPhysics
+
+/nexus/RegisterGeometry DetectorNerea
+
+/nexus/RegisterGenerator Kr83mGenerator
+#/nexus/RegisterGenerator SingleParticleGenerator
+
+/nexus/RegisterPersistencyManager PersistencyManager
+
+/nexus/RegisterRunAction DefaultRunAction
+/nexus/RegisterEventAction DefaultEventAction
+/nexus/RegisterTrackingAction DefaultTrackingAction
+
+/nexus/RegisterMacro macros/NEXT100Nerea.config.mac

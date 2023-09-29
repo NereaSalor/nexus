@@ -1,0 +1,45 @@
+## ----------------------------------------------------------------------------
+## nexus | NEXT100Nerea.config.mac
+##
+## Configuration macro to simulate Kr-83m in a cilindrical detector filled with
+## xenon
+##
+## The NEXT Collaboration
+## ----------------------------------------------------------------------------
+
+##### VERBOSITY #####
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+
+/process/em/verbose 0
+
+
+##### GENERATOR #####
+/Generator/Kr83mGenerator/region GAS
+
+##### To generate a geantino and see its tracking #####
+#/Generator/SingleParticle/particle geantino
+#/Generator/SingleParticle/min_energy 1.0 MeV
+#/Generator/SingleParticle/max_energy 2.0 MeV
+#/Generator/SingleParticle/region FRONT_SIPM
+#/Generator/SingleParticle/momentum 0 0 -1
+
+
+##### ACTIONS #####
+#/Actions/DefaultEventAction/energy_threshold 0.6 MeV
+#/Actions/DefaultEventAction/max_energy 2.55 MeV
+
+##### PHYSICS #####
+## No full simulation
+/PhysicsList/Nexus/clustering               false
+/PhysicsList/Nexus/drift                    false
+/PhysicsList/Nexus/electroluminescence      false
+/PhysicsList/Nexus/photoelectric            false
+/process/optical/processActivation Cerenkov false
+
+
+##### PERSISTENCY #####
+/nexus/persistency/outputFile Next100Nerea.next
+## eventType options: bb0nu, bb2nu, background
+/nexus/persistency/eventType background
